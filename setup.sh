@@ -36,6 +36,29 @@ check_brew() {
     return 1
 }
 
+# 修复多用户环境下 Homebrew 目录权限问题
+# Apple Silicon: /opt/homebrew   Intel: /usr/local
+ensure_brew_writable() {
+    local brew_prefix
+    brew_prefix="$(brew --prefix 2>/dev/null)" || return 1
+
+    # 测试是否可写
+    if touch "$brew_prefix/.brew_write_test" 2>/dev/null; then
+        rm -f "$brew_prefix/.brew_write_test"
+        return 0
+    fi
+
+    echo -e "  ${YELLOW}⚠️  Homebrew 目录权限不足（当前用户不是 owner）${NC}"
+    echo -e "  ${YELLOW}  正在修复（输入开机密码）...${NC}"
+    sudo chown -R "$(whoami)" "$brew_prefix" 2>/dev/null && {
+        echo -e "  ${GREEN}✅ 权限已修复${NC}"
+        return 0
+    }
+    echo -e "  ${RED}❌ 权限修复失败，请手动执行:${NC}"
+    echo -e "  ${RED}  sudo chown -R \$(whoami) ${brew_prefix}${NC}"
+    return 1
+}
+
 install_brew() {
     echo -e "${YELLOW}[1/4] 安装 Homebrew...${NC}"
     if [ "$OS" = "Darwin" ]; then
@@ -70,6 +93,7 @@ check_jdk() {
 install_jdk() {
     echo -e "${YELLOW}[2/4] 安装 JDK 17...${NC}"
     if command -v brew &> /dev/null; then
+        ensure_brew_writable || return 1
         brew install openjdk@17
         # 创建符号链接
         local jdk_path="$(brew --prefix openjdk@17)/libexec/openjdk.jdk"
@@ -103,18 +127,31 @@ check_node() {
 }
 
 install_node() {
-    echo -e "${YELLOW}[3/4] 安装 Node.js 18...${NC}"
+    echo -e "${YELLOW}[3/4] 安装 Node.js...${NC}"
     if command -v brew &> /dev/null; then
-        brew install node@18
-        echo 'export PATH="$(brew --prefix node@18)/bin:$PATH"' >> ~/.zshrc 2>/dev/null || true
-        export PATH="$(brew --prefix node@18)/bin:$PATH"
+        ensure_brew_writable || return 1
+        # 从最新 LTS 往旧版本依次尝试
+        brew install node@22 2>/dev/null || \
+        brew install node@20 2>/dev/null || \
+        brew install node 2>/dev/null || {
+            echo -e "  ${RED}❌ Node.js 安装失败${NC}"
+            echo -e "  ${RED}  手动安装: https://nodejs.org/${NC}"
+            return 1
+        }
+        # 查找安装的 node 路径
+        local node_home=""
+        for p in node@22 node@20 node; do
+            node_home=$(brew --prefix "$p" 2>/dev/null) && break
+        done
+        [ -n "$node_home" ] && echo "export PATH=\"${node_home}/bin:\$PATH\"" >> ~/.zshrc 2>/dev/null || true
+        [ -n "$node_home" ] && export PATH="${node_home}/bin:$PATH"
         echo -e "  ${GREEN}✅ Node.js 安装完成 (brew)${NC}"
     elif command -v nvm &> /dev/null; then
-        nvm install 18
-        nvm use 18
+        nvm install 22 2>/dev/null || nvm install 20 2>/dev/null || nvm install node 2>/dev/null
+        nvm use node 2>/dev/null
         echo -e "  ${GREEN}✅ Node.js 安装完成 (nvm)${NC}"
     else
-        echo -e "  ${RED}❌ 请手动安装 Node.js 18+: https://nodejs.org/${NC}"
+        echo -e "  ${RED}❌ 请手动安装 Node.js: https://nodejs.org/${NC}"
         return 1
     fi
 }
@@ -134,6 +171,7 @@ check_mysql() {
 install_mysql() {
     echo -e "${YELLOW}[4/4] 安装 MySQL...${NC}"
     if command -v brew &> /dev/null; then
+        ensure_brew_writable || return 1
         brew install mysql
         brew services start mysql
         echo -e "  ${GREEN}✅ MySQL 安装完成 (brew)${NC}"
