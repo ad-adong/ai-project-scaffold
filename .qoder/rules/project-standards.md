@@ -40,29 +40,45 @@ ai-project-scaffold/
 
 ## 零基础用户使用方式
 
-项目上传 GitHub 后，零基础用户只需在终端粘贴一条命令：
+零基础用户（无 git、无 JDK、无 Node）只需一条命令：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/用户名/仓库名/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/ad-adong/ai-project-scaffold/main/install.sh | bash
 ```
 
-**这条命令自动完成：**
-1. 下载项目到 `~/ai-project-scaffold`
+**这条命令自动完成 4 步：**
+1. 从 CDN 下载项目 ZIP 并解压到 `~/ai-project-scaffold`
 2. 安装 Homebrew → JDK 17 → Node.js 18
-3. 编译启动后端 Spring Boot
-4. 安装前端依赖 + 启动 Vite
-5. 自动打开浏览器到欢迎页
+3. 编译启动后端 Spring Boot（8080）
+4. 安装前端依赖 + 启动 Vite（3000）→ 自动打开浏览器
 
-**以后重复使用：**
+### 上传 CDN 前准备
+
+1. 将整个项目打包为 ZIP：`zip -r ai-scaffold.zip . -x "backend/target/*" "frontend/node_modules/*" ".git/*"`
+2. 将 `install.sh` 和 `ai-scaffold.zip` 上传到 CDN 同一目录
+3. 修改 `install.sh` 顶部的 `CDN_BASE` 为实际地址
+
+```bash
+CDN_BASE="https://your-cdn.com/ai-scaffold"
+PROJECT_ZIP="ai-scaffold.zip"
+```
+
+### 以后重复使用
+
 ```bash
 cd ~/ai-project-scaffold
 ./dev.sh start    # 启动
 ./dev.sh stop     # 停止
 ```
 
-**上传 GitHub 前需修改 `install.sh` 顶部配置：**
+### 备选：GitHub 分发
+
+也可以利用 GitHub Releases 托管 ZIP：
+
 ```bash
-GITHUB_REPO="YOUR_USERNAME/ai-project-scaffold"   # 替换为实际仓库
+# install.sh 用 raw.githubusercontent.com，ZIP 用 GitHub releases/download
+CDN_BASE="https://github.com/用户名/仓库名/releases/latest/download"
+PROJECT_ZIP="ai-scaffold.zip"
 ```
 
 ## 开发环境管理（dev.sh）

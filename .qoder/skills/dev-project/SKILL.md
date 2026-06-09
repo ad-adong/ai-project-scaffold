@@ -76,7 +76,7 @@ description: 管理项目开发环境。当用户说"启动项目"、"运行项�
 > 打开终端，粘贴运行这条命令，等待几分钟即可：
 > 
 > ```bash
-> curl -fsSL https://raw.githubusercontent.com/用户名/仓库名/main/install.sh | bash
+> curl -fsSL https://raw.githubusercontent.com/ad-adong/ai-project-scaffold/main/install.sh | bash
 > ```
 > 
-> 这条命令会自动完成下载、环境安装、项目启动全部流程。
+> 这条命令会自动：下载项目 → 安装 JDK/Node → 启动前后端 → 打开浏览器。

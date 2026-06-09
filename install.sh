@@ -21,10 +21,12 @@ CYAN='\033[0;36m'
 NC='\033[0m'
 
 # ===================== 配置（上传 CDN 前修改）=====================
-# CDN 基础地址，install.sh 和项目 ZIP 放在同一目录下
-CDN_BASE="https://your-cdn.com/ai-scaffold"
-# 项目 ZIP 文件名
-PROJECT_ZIP="ai-scaffold.zip"
+# GitHub 仓库地址（ZIP 下载源，也支持 CDN）
+GITHUB_REPO="ad-adong/ai-project-scaffold"
+GITHUB_BRANCH="main"
+# CDN 基础地址（可选，保留 GitHub 默认即可）
+CDN_BASE="https://github.com/${GITHUB_REPO}/archive/refs/heads"
+PROJECT_ZIP="${GITHUB_BRANCH}.zip"
 # 安装到的目标目录
 PROJECT_DIR="$HOME/ai-project-scaffold"
 # =================================================================
