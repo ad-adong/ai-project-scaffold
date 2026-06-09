@@ -1,0 +1,15 @@
+# ============================================
+# MySQL Profile 配置
+# 激活方式：SPRING_PROFILES_ACTIVE=mysql 或 dev.sh 中 DB_MODE=mysql
+# ============================================
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/scaffold_db?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  sql:
+    init:
+      schema-locations: classpath:schema-mysql.sql

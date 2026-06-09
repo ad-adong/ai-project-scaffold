@@ -1,0 +1,99 @@
+# ============================================
+# AI 项目脚手架 .gitignore
+# ============================================
+
+# ========================
+# 前端 (Node / React / Vite)
+# ========================
+**/node_modules/
+frontend/dist/
+frontend/.vite/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.tsbuildinfo
+
+# ========================
+# 后端 (Java / Maven / Spring Boot)
+# ========================
+**/target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Maven
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# ========================
+# IDE
+# ========================
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.settings/
+.project
+.classpath
+*.swp
+*.swo
+*~
+
+# ========================
+# OS
+# ========================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# ========================
+# 日志 & 运行时
+# ========================
+logs/
+*.log
+*.pid
+*.seed
+*.pid.lock
+hc_err_pid*
+replay_pid*
+
+# ========================
+# 环境变量 & 敏感配置
+# ========================
+.env
+.env.local
+.env.*.local
+*.local.yml
+application-local.yml
+application-dev.yml
+
+# ========================
+# 临时文件
+# ========================
+tmp/
+temp/
+*.tmp
+*.bak
+*.cache

@@ -1,0 +1,126 @@
+/* ============================================
+   Welcome 页面样式
+   ============================================ */
+
+/* ---------- 布局 ---------- */
+.layout {
+  min-height: 100vh;
+}
+
+/* ---------- 顶栏 ---------- */
+.header {
+  display: flex;
+  align-items: center;
+  background: #001529;
+  padding: 0 48px;
+}
+
+.headerIcon {
+  font-size: 24px;
+  color: #1890ff;
+}
+
+.headerTitle {
+  color: #fff;
+  margin: 0;
+  margin-left: 12px;
+}
+
+/* ---------- 内容区 ---------- */
+.content {
+  padding: 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ---------- 欢迎区域 ---------- */
+.heroSection {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.heroTitle {
+  font-size: 48px;
+}
+
+.heroIcon {
+  margin-right: 16px;
+  color: #1890ff;
+}
+
+.heroDesc {
+  font-size: 18px;
+  color: #666;
+  margin-top: 16px;
+}
+
+/* ---------- 技术栈卡片 ---------- */
+.techCards {
+  margin-bottom: 48px;
+}
+
+.techCardBody {
+  text-align: center;
+}
+
+.techIcon {
+  font-size: 40px;
+}
+
+.techIconSpring {
+  color: #52c41a;
+}
+
+.techIconReact {
+  color: #1890ff;
+}
+
+.techIconAntd {
+  color: #fa8c16;
+}
+
+.techIconMysql {
+  color: #722ed1;
+}
+
+.techTitle {
+  margin-top: 12px;
+}
+
+/* ---------- 后端状态卡片 ---------- */
+.statusCard {
+  margin-bottom: 24px;
+}
+
+.statusLoading {
+  text-align: center;
+  padding: 24px;
+}
+
+.statusError {
+  text-align: center;
+  padding: 24px;
+}
+
+.statusErrorIcon {
+  font-size: 32px;
+  color: #ff4d4f;
+}
+
+.statusErrorText {
+  margin-top: 12px;
+  color: #ff4d4f;
+}
+
+/* ---------- 快速开始 ---------- */
+.stepList {
+  padding-left: 20px;
+  margin: 0;
+}
+
+/* ---------- 底栏 ---------- */
+.footer {
+  text-align: center;
+  background: #f0f2f5;
+}
