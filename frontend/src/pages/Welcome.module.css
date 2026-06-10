@@ -55,39 +55,6 @@
   margin-top: 16px;
 }
 
-/* ---------- 技术栈卡片 ---------- */
-.techCards {
-  margin-bottom: 48px;
-}
-
-.techCardBody {
-  text-align: center;
-}
-
-.techIcon {
-  font-size: 40px;
-}
-
-.techIconSpring {
-  color: #52c41a;
-}
-
-.techIconReact {
-  color: #1890ff;
-}
-
-.techIconAntd {
-  color: #fa8c16;
-}
-
-.techIconMysql {
-  color: #722ed1;
-}
-
-.techTitle {
-  margin-top: 12px;
-}
-
 /* ---------- 后端状态卡片 ---------- */
 .statusCard {
   margin-bottom: 24px;
@@ -113,10 +80,41 @@
   color: #ff4d4f;
 }
 
-/* ---------- 快速开始 ---------- */
-.stepList {
-  padding-left: 20px;
-  margin: 0;
+/* ---------- Qoder 对话指引 ---------- */
+.qoderCard {
+  margin-bottom: 24px;
+}
+
+.qoderDesc {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 15px;
+}
+
+.qoderExampleCard {
+  height: 100%;
+}
+
+.qoderExampleBody {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.qoderExampleIcon {
+  font-size: 28px;
+  color: #1890ff;
+}
+
+.qoderInputHint {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.qoderPromptText {
+  font-size: 16px;
 }
 
 /* ---------- 底栏 ---------- */

@@ -23,16 +23,20 @@ description: 管理项目开发环境。当用户说"启动项目"、"运行项�
 
 ### 启动
 
+**在新终端窗口中执行：**
+
 ```bash
-./dev.sh start
+osascript -e 'tell application "Terminal" to do script "cd \"$PWD\" && ./dev.sh start"'
 ```
 
 告知用户：前端 http://localhost:3000 | 后端 http://localhost:8080 | 停止用 `./dev.sh stop`
 
 ### 停止
 
+**在新终端窗口中执行：**
+
 ```bash
-./dev.sh stop
+osascript -e 'tell application "Terminal" to do script "cd \"$PWD\" && ./dev.sh stop"'
 ```
 
 告知用户：所有服务（前端 → 后端 → MySQL）已停止。

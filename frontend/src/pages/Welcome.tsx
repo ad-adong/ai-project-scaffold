@@ -3,11 +3,12 @@ import { Layout, Card, Typography, Button, Space, Spin, Tag, Row, Col } from 'an
 import {
   RocketOutlined,
   ApiOutlined,
-  DatabaseOutlined,
-  SettingOutlined,
   GithubOutlined,
   CheckCircleOutlined,
   CloseCircleOutlined,
+  RobotOutlined,
+  ToolOutlined,
+  CodeOutlined,
 } from '@ant-design/icons';
 import axios from 'axios';
 import styles from './Welcome.module.css';
@@ -22,19 +23,11 @@ interface BackendStatus {
   database: string;
 }
 
-/** 技术栈配置 */
-const TECH_STACKS = [
-  { icon: ApiOutlined, className: styles.techIconSpring, title: 'Spring Boot 3.x', desc: '后端框架，RESTful API' },
-  { icon: RocketOutlined, className: styles.techIconReact, title: 'React 18', desc: '前端框架，组件化开发' },
-  { icon: SettingOutlined, className: styles.techIconAntd, title: 'Ant Design 5', desc: 'UI 组件库，开箱即用' },
-  { icon: DatabaseOutlined, className: styles.techIconMysql, title: 'MySQL / H2', desc: '数据库，H2 默认，MySQL 可选' },
-];
-
-/** 快速开始步骤 */
-const QUICK_STEPS = [
-  { title: '1\uFE0F\u20E3 配置数据库', items: ['默认使用 H2 内存数据库，无需安装', '如需 MySQL，编辑 dev.sh 将 DB_MODE 改为 mysql'] },
-  { title: '2\uFE0F\u20E3 启动项目', items: ['在项目根目录执行：', './dev.sh start', '一键启动所有服务'] },
-  { title: '3\uFE0F\u20E3 开始开发', items: ['前端：cd frontend && npm run dev', '后端：cd backend && ./mvnw spring-boot:run', '使用 Qoder 打开项目，开始 AI 编码'] },
+/** Qoder 对话示例 */
+const QODER_EXAMPLES = [
+  { icon: RocketOutlined, prompt: '启动项目' },
+  { icon: ToolOutlined, prompt: '安装环境' },
+  { icon: CodeOutlined, prompt: '开发一个登录页' },
 ];
 
 export default function Welcome() {
@@ -82,20 +75,28 @@ export default function Welcome() {
           </Paragraph>
         </div>
 
-        {/* 技术栈卡片 */}
-        <Row gutter={[24, 24]} className={styles.techCards}>
-          {TECH_STACKS.map((tech) => (
-            <Col key={tech.title} xs={24} sm={12} md={6}>
-              <Card hoverable>
-                <div className={styles.techCardBody}>
-                  <tech.icon className={`${styles.techIcon} ${tech.className}`} />
-                  <Title level={4} className={styles.techTitle}>{tech.title}</Title>
-                  <Text type="secondary">{tech.desc}</Text>
-                </div>
-              </Card>
-            </Col>
-          ))}
-        </Row>
+        {/* Qoder 对话指引 */}
+        <Card
+          title={<Space><RobotOutlined /><span>与 Qoder 对话，一切交给我</span></Space>}
+          className={styles.qoderCard}
+        >
+          <Paragraph type="secondary" className={styles.qoderDesc}>
+            在 Qoder 对话框中直接说出你的需求，就像和同事聊天一样简单。
+          </Paragraph>
+          <Row gutter={[24, 16]}>
+            {QODER_EXAMPLES.map((example) => (
+              <Col key={example.prompt} xs={24} sm={8} md={8}>
+                <Card size="small" hoverable className={styles.qoderExampleCard}>
+                  <div className={styles.qoderExampleBody}>
+                    <example.icon className={styles.qoderExampleIcon} />
+                    <Text type="secondary" className={styles.qoderInputHint}>Qoder里直接输入：</Text>
+                    <Text code className={styles.qoderPromptText}>"{example.prompt}"</Text>
+                  </div>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </Card>
 
         {/* 后端连接状态 */}
         <Card
@@ -138,26 +139,6 @@ export default function Welcome() {
           ) : null}
         </Card>
 
-        {/* 快速开始指引 */}
-        <Card title={<Space><RocketOutlined /><span>快速开始</span></Space>}>
-          <Row gutter={[24, 16]}>
-            {QUICK_STEPS.map((step) => (
-              <Col key={step.title} xs={24} md={8}>
-                <Card size="small" type="inner" title={step.title}>
-                  <ul className={styles.stepList}>
-                    {step.items.map((item, i) => (
-                      <li key={i}>
-                        {item === './dev.sh start'
-                          ? <Text code copyable>{item}</Text>
-                          : item}
-                      </li>
-                    ))}
-                  </ul>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        </Card>
       </Content>
 
       <Footer className={styles.footer}>
