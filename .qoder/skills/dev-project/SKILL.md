@@ -23,20 +23,22 @@ description: 管理项目开发环境。当用户说"启动项目"、"运行项�
 
 ### 启动
 
-**在新终端窗口中执行：**
+**使用 Qoder 内置终端（后台执行）：**
 
 ```bash
-osascript -e 'tell application "Terminal" to do script "cd \"$PWD\" && ./dev.sh start"'
+./dev.sh start
 ```
 
-告知用户：前端 http://localhost:3000 | 后端 http://localhost:8080 | 停止用 `./dev.sh stop`
+> 使用 Bash 工具，设置 `is_background=true`，因为 dev.sh start 会长期运行。
+
+启动后告知用户：前端 http://localhost:3000 | 后端 http://localhost:8080 | 停止用 `./dev.sh stop`
 
 ### 停止
 
-**在新终端窗口中执行：**
+**使用 Qoder 内置终端执行：**
 
 ```bash
-osascript -e 'tell application "Terminal" to do script "cd \"$PWD\" && ./dev.sh stop"'
+./dev.sh stop
 ```
 
 告知用户：所有服务（前端 → 后端 → MySQL）已停止。
