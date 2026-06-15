@@ -1,44 +1,57 @@
 ---
 name: dev-project
-description: 管理项目开发环境。当用户说"启动项目"、"运行项目"、"跑起来"、"start"时执行 dev.sh start；当用户说"停止"、"停掉"、"关闭"、"stop"时执行 dev.sh stop。
+description: 管理项目开发环境。当用户说"启动项目"、"运行项目"、"跑起来"、"start"时执行 dev.sh start（macOS）或 dev.bat start（Windows）；当用户说"停止"、"停掉"、"关闭"、"stop"时执行 dev.sh stop（macOS）或 dev.bat stop（Windows）。
 ---
 
 # 开发环境管理
 
 ## 触发条件
 
-### 启动意图 → `./dev.sh start`
+### 启动意图 → `./dev.sh start`（macOS）/ `dev.bat start`（Windows）
 - "启动项目" / "运行项目" / "把项目跑起来"
 - "启动一下" / "跑一下" / "运行一下"
 - "start" / "run the project"
 
-### 停止意图 → `./dev.sh stop`
+### 停止意图 → `./dev.sh stop`（macOS）/ `dev.bat stop`（Windows）
 - "停止项目" / "停掉服务" / "关掉" / "关闭项目"
 - "stop" / "shutdown"
 - 任何意图停止开发环境的表达
 
 ## 执行步骤
 
-1. 确认当前在项目根目录
+### 1. 判断操作系统
 
-### 启动
+- **macOS / Linux**：执行 `./dev.sh`
+- **Windows**：执行 `dev.bat`
+
+### 2. 启动
 
 **使用 Qoder 内置终端（后台执行）：**
 
+**macOS：**
 ```bash
 ./dev.sh start
 ```
+**Windows（命令行）：**
+```bat
+dev.bat start
+```
 
-> 使用 Bash 工具，设置 `is_background=true`，因为 dev.sh start 会长期运行。
+> 使用 Bash 工具，设置 `is_background=true`，因为脚本会长期运行。
 
-启动后告知用户：前端 http://localhost:3000 | 后端 http://localhost:8080 | 停止用 `./dev.sh stop`
+启动后告知用户：前端 http://localhost:3000 | 后端 http://localhost:8080 | 停止用 `./dev.sh stop`（macOS）或 `dev.bat stop`（Windows）
 
-### 停止
+### 3. 停止
 
 **使用 Qoder 内置终端执行：**
 
+**macOS：**
 ```bash
 ./dev.sh stop
+```
+**Windows：**
+```bat
+dev.bat stop
 ```
 
 告知用户：所有服务（前端 → 后端 → MySQL）已停止。
